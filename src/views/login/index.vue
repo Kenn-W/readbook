@@ -14,7 +14,7 @@
         <el-icon :size="20" class="svg-container">
           <Lock />
         </el-icon>
-        <el-input v-model="form.password" type="Password"></el-input>
+        <el-input v-model="form.password"  type="Password" :show-password= true ></el-input>
       </el-form-item>
       <el-button type="primary" class="login-button" @click="handleLogin"
         >登录</el-button
@@ -28,8 +28,8 @@ import { ref } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
 // import { login } from '@/api/login'
 const form = ref({
-  username: '',
-  password: ''
+  username: 'admin',
+  password: '123456'
 })
 const rules = ref({
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -37,14 +37,16 @@ const rules = ref({
 })
 const formRef = ref(null)
 const handleLogin = () => {
-  formRef.value.validate((valid) => {
+  formRef.value.validate(async(valid) => {
     if (
       valid &&
       form.value.username === 'admin' &&
       form.value.password === '123456'
     ) {
-      alert('登录成功')
+      // alert('登录成功')
       // alert('submit!')
+      const res = form.value
+      console.log(res)
       // await login(form.value)
     } else {
       alert('登陆失败！')

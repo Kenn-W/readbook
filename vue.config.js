@@ -18,7 +18,7 @@ module.exports = {
   },
   devServer: {
     https: false,
-    hotOnly: false,
+    hot: true,
     proxy: {
       '/api': {
         target: 'https://lianghj.top:8888/api/private/v1/',
@@ -30,5 +30,3 @@ module.exports = {
     }
   }
 }
-
-
