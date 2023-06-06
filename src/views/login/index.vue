@@ -8,13 +8,17 @@
         <el-icon :size="20" class="svg-container">
           <User />
         </el-icon>
-        <el-input v-model="form.username"></el-input>
+        <el-input v-model="username"></el-input>
       </el-form-item>
       <el-form-item prop="password" autocomplete="off">
         <el-icon :size="20" class="svg-container">
           <Lock />
         </el-icon>
-        <el-input v-model="form.password"  type="Password" :show-password= true ></el-input>
+        <el-input
+          v-model="password"
+          type="Password"
+          :show-password="true"
+        ></el-input>
       </el-form-item>
       <el-button type="primary" class="login-button" @click="handleLogin"
         >登录</el-button
@@ -23,43 +27,56 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { User, Lock } from '@element-plus/icons-vue'
-// import { login } from '@/api/login'
-const form = ref({
-  username: 'admin',
-  password: '123456'
-})
-const rules = ref({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-})
-const formRef = ref(null)
-const handleLogin = () => {
-  formRef.value.validate(async(valid) => {
-    if (
-      valid &&
-      form.value.username === 'admin' &&
-      form.value.password === '123456'
-    ) {
-      // alert('登录成功')
-      // alert('submit!')
-      const res = form.value
-      console.log(res)
-      // await login(form.value)
-    } else {
-      alert('登陆失败！')
-      return false
+<script>
+// import { ref } from 'vue'
+// import { User, Lock } from '@element-plus/icons-vue'
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      username: '',
+      password: ''
     }
-  })
+  },
+  methods: {
+    handleLogin(event) {
+      event.preventDefault() // 阻止表单默认提交行为
+
+      const userData = {
+        username: this.username,
+        password: this.password
+      }
+
+      axios
+        .post('/login', userData)
+        .then((response) => {
+          // 处理登录成功的响应
+          console.log(response.data)
+        })
+        .catch((error) => {
+          // 处理登录失败的响应
+          console.error(error)
+        })
+    }
+  }
 }
+// import { login } from '@/api/login'
+// const form = ref({
+//   username: 'admin',
+//   password: '123456'
+// })
+// const rules = ref({
+//   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+//   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+// })
+// const formRef = ref(null)
+
 </script>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
-$dark_gray: #889aa4;
-$light_gray: #eee;
+$bg: #ffffff;
+$dark_gray: #29a6ea;
+$light_gray: #252525;
 $cursor: #fff;
 
 .login-container {

@@ -8,13 +8,17 @@ const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = {
-  configureWebpack: config => {
-    config.plugins.push(AutoImport({
-      resolvers: [ElementPlusResolver()]
-    }))
-    config.plugins.push(Components({
-      resolvers: [ElementPlusResolver()]
-    }))
+  configureWebpack: (config) => {
+    config.plugins.push(
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      })
+    )
+    config.plugins.push(
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    )
   },
   devServer: {
     https: false,
@@ -26,6 +30,17 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
+      }
+    }
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        // 8版本用prependData:
+        additionalData: `
+          @import "@/styles/variables.scss";  // scss文件地址
+          @import "@/styles/mixin.scss";     // scss文件地址
+        `
       }
     }
   }
