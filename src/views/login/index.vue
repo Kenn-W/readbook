@@ -27,9 +27,13 @@
   </div>
 </template>
 
+<script setup>
+  import { User, Lock } from '@element-plus/icons-vue'
+</script>
+
 <script>
 // import { ref } from 'vue'
-// import { User, Lock } from '@element-plus/icons-vue'
+
 import axios from 'axios'
 export default {
   data() {
@@ -51,11 +55,13 @@ export default {
         .post('/login', userData)
         .then((response) => {
           // 处理登录成功的响应
+          alert('登陆成功')
           console.log(response.data)
         })
         .catch((error) => {
           // 处理登录失败的响应
           console.error(error)
+          alert('登陆失败')
         })
     }
   }
