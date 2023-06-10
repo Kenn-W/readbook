@@ -28,13 +28,14 @@
 </template>
 
 <script setup>
-  import { User, Lock } from '@element-plus/icons-vue'
+import { User, Lock } from '@element-plus/icons-vue'
 </script>
 
 <script>
 // import { ref } from 'vue'
 
 import axios from 'axios'
+import router from '@/router'
 export default {
   data() {
     return {
@@ -55,8 +56,13 @@ export default {
         .post('/login', userData)
         .then((response) => {
           // 处理登录成功的响应
-          alert('登陆成功')
-          console.log(response.data)
+          if (response.data.code === 200) {
+            alert('登陆成功')
+            router.replace('/')
+            console.log(response.data)
+          } else {
+            alert('登陆失败')
+          }
         })
         .catch((error) => {
           // 处理登录失败的响应
@@ -76,7 +82,6 @@ export default {
 //   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 // })
 // const formRef = ref(null)
-
 </script>
 
 <style lang="scss" scoped>
