@@ -3,11 +3,8 @@
   <el-menu
     default-active="2"
     class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
     router
     unique-opened
-    :collapse = "$store.getters.siderType"
   >
     <el-menu-item index="home">
       <el-icon><House /></el-icon>

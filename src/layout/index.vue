@@ -1,12 +1,12 @@
 <template>
   <el-container class="app-wrapper">
-    <el-aside :width="$asideWidth" class="sidebar-container">
+    <el-aside width="200px" class="sidebar-container">
       <Menu/>
     </el-aside>
   </el-container>
   <el-container class="container">
     <el-header><Headers /></el-header>
-    <el-main>Main</el-main>
+    <el-main><router-view /></el-main>
   </el-container>
 </template>
 
@@ -17,7 +17,6 @@ import Headers from './headers'
 // import variables from '@/styles/variables.scss'
 // const asideWidth = ref(variables.sideBarWidth)
 </script>
-
 <style lang="scss" scoped>
 .app-container {
   position: relative;
