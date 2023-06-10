@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-wrapper">
-    <el-aside width="200px" class="sidebar-container">
+    <el-aside width="220px" class="sidebar-container">
       <Menu/>
     </el-aside>
   </el-container>

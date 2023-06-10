@@ -1,5 +1,5 @@
 <template>
-  <h3 class="mb-2" style="background-color: #F0F8FF; color: #0E3955; padding: 18px; ">读步天下管理系统</h3>
+  <h3 class="mb-2" style="background-color: #f0f8ff; color: #0E3955; padding: 18px; ">读步天下管理系统</h3>
   <el-menu
     default-active="2"
     class="el-menu-vertical-demo"
