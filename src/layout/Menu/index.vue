@@ -9,7 +9,7 @@
     unique-opened
     :collapse = "$store.getters.siderType"
   >
-    <el-menu-item index="/">
+    <el-menu-item index="home">
       <el-icon><House /></el-icon>
       <span>后台主页</span>
     </el-menu-item>
