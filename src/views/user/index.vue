@@ -24,7 +24,13 @@
       <el-table-column prop="user_regist_time" label="创建时间" width="150" />
       <el-table-column label="操作" width="200">
         <template #default>
-          <el-button type="primary" :icon="Edit" circle />
+          <el-button
+            type="primary"
+            :icon="Edit"
+            circle
+            text
+            @click="dialogVisible = true"
+          />
           <el-button type="primary" :icon="View" circle />
           <el-button type="danger" :icon="Delete" circle />
         </template>
@@ -46,15 +52,38 @@
       <el-table-column prop="book_id" label="书籍ID" width="150" />
       <el-table-column prop="book_title" label="书籍标题" width="150" />
       <el-table-column prop="book_ISBN" label="ISBN" width="150" />
-      <el-table-column
-        prop="book_score"
-        label="打分"
-        width="150"
-      /> </el-table
+      <el-table-column prop="book_score" label="打分" width="150" /> </el-table
   ></el-card>
+  <el-dialog v-model="dialogVisible" title="用户数据修改" width="30%">
+    <span>请选择要修改的数据项并写入新数据</span>
+    <div>
+      <el-select v-model="value2" class="m-2" placeholder="Select" span="1">
+        <el-option
+          v-for="item in options2"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+    </div>
+    <div>
+      <el-col :span="15">
+        <el-input clearable v-model="queryForm.query"></el-input>
+      </el-col>
+    </div>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogVisible = false">
+          Confirm
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
+// import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 import { View, Delete, Edit, Search } from '@element-plus/icons-vue'
 const queryForm = ref({
@@ -62,15 +91,40 @@ const queryForm = ref({
   pagenum: 1,
   pagesize: 2
 })
+
+const dialogVisible = ref(false)
+
 const value = ref('')
+const value2 = ref('')
+
 // const handleClick = () => {
 //   console.log('click')
 // }
+
 const options = [
   {
     value: 'user_id',
     label: '用户ID'
   },
+  {
+    value: 'user_name',
+    label: '用户名'
+  },
+  {
+    value: 'user_age',
+    label: '年龄'
+  },
+  {
+    value: 'user_gender',
+    label: '性别'
+  },
+  {
+    value: 'user_regist_time',
+    label: '注册时间范围（格式：2000-01-01, 2010-01-01）'
+  }
+]
+
+const options2 = [
   {
     value: 'user_name',
     label: '用户名'

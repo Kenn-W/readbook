@@ -4,16 +4,13 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import('../views/login')
   },
   {
     path: '/',
     name: '/',
     component: () => import('../layout'),
-    redirect: '/user',
+    redirect: '/login',
     children: [
       {
         path: 'user',

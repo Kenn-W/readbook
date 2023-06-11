@@ -1,6 +1,7 @@
 <template>
   <el-space wrap>
     <el-card
+      shadow="hover"
       class="box-card"
       id="user"
       style="
@@ -12,15 +13,16 @@
     >
       <template #header>
         <div class="card-header" style="text-align: center">
-          <el-icon style="font-size: 2em;"><User /></el-icon>
+          <el-icon style="font-size: 2em"><User /></el-icon>
           <span style="font-size: 2em; margin-right: 5px">用户总数</span>
         </div>
       </template>
-      <h1 style="font-size: 2em; text-align: center">112345</h1>
+      <h1 style="font-size: 2em; text-align: center">{{ userCount }}</h1>
     </el-card>
   </el-space>
   <el-space wrap>
     <el-card
+      shadow="hover"
       class="box-card"
       id="user"
       style="
@@ -32,15 +34,16 @@
     >
       <template #header>
         <div class="card-header" style="text-align: center">
-          <el-icon style="font-size: 2em;"><Collection /></el-icon>
+          <el-icon style="font-size: 2em"><Collection /></el-icon>
           <span style="font-size: 2em; margin-right: 5px">图书登记数</span>
         </div>
       </template>
-      <h1 style="font-size: 2em; text-align: center">112345</h1>
+      <h1 style="font-size: 2em; text-align: center">{{ bookCount }}</h1>
     </el-card>
   </el-space>
   <el-space wrap>
     <el-card
+      shadow="hover"
       class="box-card"
       id="user"
       style="
@@ -52,15 +55,16 @@
     >
       <template #header>
         <div class="card-header" style="text-align: center">
-          <el-icon style="font-size: 2em;"><ChatSquare /></el-icon>
+          <el-icon style="font-size: 2em"><ChatSquare /></el-icon>
           <span style="font-size: 2em; margin-right: 5px">评价条数</span>
         </div>
       </template>
-      <h1 style="font-size: 2em; text-align: center">112345</h1>
+      <h1 style="font-size: 2em; text-align: center">{{ commentCount }}</h1>
     </el-card>
   </el-space>
   <el-space wrap>
     <el-card
+      shadow="hover"
       class="box-card"
       id="user"
       style="
@@ -72,15 +76,48 @@
     >
       <template #header>
         <div class="card-header" style="text-align: center">
-          <el-icon style="font-size: 2em;"><CollectionTag /></el-icon>
+          <el-icon style="font-size: 2em"><CollectionTag /></el-icon>
           <span style="font-size: 2em; margin-right: 5px">图书tag数</span>
         </div>
       </template>
-      <h1 style="font-size: 2em; text-align: center">112345</h1>
+      <h1 style="font-size: 2em; text-align: center">{{ tagCount }}</h1>
     </el-card>
   </el-space>
 </template>
 
-<script setup>import { User, Collection, ChatSquare, CollectionTag } from '@element-plus/icons-vue'</script>
+<script>
+</script>
+
+<script setup>
+import axios from 'axios'
+import {
+  User,
+  Collection,
+  ChatSquare,
+  CollectionTag
+} from '@element-plus/icons-vue'
+
+axios
+  .get('/homepage/entry')
+  .then((response) => {
+    const { code, result } = response.data
+    if (code === 0) {
+      this.userCount = result.user_cnt
+      this.bookCount = result.book_cnt
+      this.commentCount = result.comment_cnt
+      this.tagCount = result.tag_cnt
+    } else {
+      console.error('请求数据失败:', response.data.message)
+      // 在出错时可以进行适当的处理，例如显示错误信息或设置默认值
+      // this.userCount = defaultValue;
+      // this.bookCount = defaultValue;
+      // this.commentCount = defaultValue;
+      // this.tagCount = defaultValue;
+    }
+  })
+  .catch((error) => {
+    console.error('请求数据时出错：', error)
+  })
+</script>
 
 <style lang="scss" scoped></style>

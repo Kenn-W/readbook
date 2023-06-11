@@ -58,7 +58,7 @@ export default {
           // 处理登录成功的响应
           if (response.data.code === 200) {
             alert('登陆成功')
-            router.replace('/')
+            router.replace('/home')
             console.log(response.data)
           } else {
             alert('登陆失败')

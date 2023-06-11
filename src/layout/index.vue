@@ -1,12 +1,12 @@
 <template>
   <el-container class="app-wrapper">
     <el-aside width="220px" class="sidebar-container">
-      <Menu/>
+      <Menu />
     </el-aside>
   </el-container>
   <el-container class="container">
     <el-header><Headers /></el-header>
-    <el-main><router-view /></el-main>
+    <el-main style="background-color: #f7f7f8;"><router-view /></el-main>
   </el-container>
 </template>
 
@@ -37,5 +37,15 @@ import Headers from './headers'
 }
 ::v-deep .el-header {
   padding: 0;
+}
+
+el-aside {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -10px; /* 调整阴影宽度 */
+  bottom: 0;
+  width: 10px; /* 调整阴影宽度 */
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
 }
 </style>
