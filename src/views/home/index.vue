@@ -85,39 +85,55 @@
   </el-space>
 </template>
 
-<script>
-</script>
-
 <script setup>
-import axios from 'axios'
 import {
   User,
   Collection,
   ChatSquare,
   CollectionTag
 } from '@element-plus/icons-vue'
+</script>
 
-axios
-  .get('/homepage/entry')
-  .then((response) => {
-    const { code, result } = response.data
-    if (code === 0) {
-      this.userCount = result.user_cnt
-      this.bookCount = result.book_cnt
-      this.commentCount = result.comment_cnt
-      this.tagCount = result.tag_cnt
-    } else {
-      console.error('请求数据失败:', response.data.message)
-      // 在出错时可以进行适当的处理，例如显示错误信息或设置默认值
-      // this.userCount = defaultValue;
-      // this.bookCount = defaultValue;
-      // this.commentCount = defaultValue;
-      // this.tagCount = defaultValue;
+<script>
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      userCount: null,
+      bookCount: null,
+      commentCount: null,
+      tagCount: null
     }
-  })
-  .catch((error) => {
-    console.error('请求数据时出错：', error)
-  })
+  },
+  methods: {
+    fetchData() {
+      axios
+        .get('/homepage/entry')
+        .then((response) => {
+          const { code, result } = response.data
+          if (code === 0) {
+            this.userCount = result.user_cnt
+            this.bookCount = result.book_cnt
+            this.commentCount = result.comment_cnt
+            this.tagCount = result.tag_cnt
+          } else {
+            console.error('请求数据失败:', response.data.message)
+            // 在出错时可以进行适当的处理，例如显示错误信息或设置默认值
+            // this.userCount = defaultValue;
+            // this.bookCount = defaultValue;
+            // this.commentCount = defaultValue;
+            // this.tagCount = defaultValue;
+          }
+        })
+        .catch((error) => {
+          console.error('请求数据时出错：', error)
+        })
+    }
+  },
+  created() {
+    this.fetchData()
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
