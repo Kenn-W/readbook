@@ -152,11 +152,11 @@ export default {
           label: '用户名'
         },
         {
-          value: 'user_age',
+          value: 'age',
           label: '年龄'
         },
         {
-          value: 'user_gender',
+          value: 'gender',
           label: '性别'
         },
         {
@@ -171,21 +171,40 @@ export default {
   },
   methods: {
     search() {
-      const requestData = {
-        [this.value.value]: this.queryForm.query
-      }
-
       let apiUrl = ''
+      let requestData = {}
+
       if (this.value.value === 'user_id') {
-        apiUrl = '/usermanage/user_id'
+        apiUrl = '/api/usermanage/user_id'
+        requestData = {
+          user_id: this.queryForm.query
+        }
       } else if (this.value.value === 'user_name') {
-        apiUrl = '/usermanage/user_name'
+        apiUrl = '/api/usermanage/user_name'
+        requestData = {
+          user_name: this.queryForm.query
+        }
       } else if (this.value.value === 'age') {
-        apiUrl = '/usermanage/age'
+        apiUrl = '/api/usermanage/user_age'
+        console.log(this.queryForm.query)
+        requestData = {
+          age: this.queryForm.query
+        }
       } else if (this.value.value === 'gender') {
-        apiUrl = '/usermanage/gender'
+        apiUrl = '/api/usermanage/user_gender'
+        console.log(this.queryForm.query)
+        requestData = {
+          gender: this.queryForm.query
+        }
       } else if (this.value.value === 'regst_time') {
-        apiUrl = '/usermanage/regst_time'
+        apiUrl = '/api/usermanage/user_regist_time'
+        const [startTime, endTime] = this.queryForm.query.split(',')
+        console.log(startTime.trim())
+        console.log(endTime.trim())
+        requestData = {
+          user_regist_time1: startTime.trim(),
+          user_regist_time2: endTime.trim()
+        }
       }
 
       axios
@@ -216,7 +235,7 @@ export default {
       }
 
       axios
-        .post('/usermanage/user_rate_record', requestData)
+        .post('/api/usermanage/user_rate_record', requestData)
         .then((response) => {
           const data = response.data
           if (data.code === 0) {
@@ -234,9 +253,10 @@ export default {
       this.userIdToDelete = userId // 保存要删除的用户ID
       this.showConfirmDialog = true // 打开确认框
       axios
-        .post('/usermanage/delete_user', { user_id: userId })
+        .post('/api/usermanage/delete_user', { user_id: userId })
         .then((response) => {
-          // const data = response.data
+          const data = response.data
+          console.log(data)
           alert('删除成功')
         })
         .catch((error) => {

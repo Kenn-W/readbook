@@ -6,7 +6,8 @@
       id="user"
       style="
         margin: 10px;
-        width: 300px;
+        width: 400px;
+        height: 175px;
         background-color: #ea7070;
         color: white;
       "
@@ -27,7 +28,8 @@
       id="user"
       style="
         margin: 10px;
-        width: 300px;
+        width: 400px;
+        height: 175px;
         background-color: #82c95f;
         color: white;
       "
@@ -48,7 +50,8 @@
       id="user"
       style="
         margin: 10px;
-        width: 300px;
+        width: 400px;
+        height: 175px;
         background-color: #be68e8;
         color: white;
       "
@@ -69,7 +72,8 @@
       id="user"
       style="
         margin: 10px;
-        width: 300px;
+        width: 400px;
+        height: 175px;
         background-color: #648adb;
         color: white;
       "
@@ -108,7 +112,7 @@ export default {
   methods: {
     fetchData() {
       axios
-        .get('/homepage/entry')
+        .get('/api/homepage/entry')
         .then((response) => {
           const { code, result } = response.data
           if (code === 0) {
