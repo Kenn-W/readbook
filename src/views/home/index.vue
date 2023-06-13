@@ -118,11 +118,10 @@ export default {
             this.tagCount = result.tag_cnt
           } else {
             console.error('请求数据失败:', response.data.message)
-            // 在出错时可以进行适当的处理，例如显示错误信息或设置默认值
-            // this.userCount = defaultValue;
-            // this.bookCount = defaultValue;
-            // this.commentCount = defaultValue;
-            // this.tagCount = defaultValue;
+            this.userCount = 0
+            this.bookCount = 0
+            this.commentCount = 0
+            this.tagCount = 0
           }
         })
         .catch((error) => {
