@@ -56,7 +56,7 @@
       <template #header>
         <div class="card-header" style="text-align: center">
           <el-icon style="font-size: 2em"><ChatSquare /></el-icon>
-          <span style="font-size: 2em; margin-right: 5px">评价条数</span>
+          <span style="font-size: 2em; margin-right: 5px">评分条数</span>
         </div>
       </template>
       <h1 style="font-size: 2em; text-align: center">{{ commentCount }}</h1>
