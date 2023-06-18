@@ -57,7 +57,9 @@
     <span>确定要删除该用户吗？</span>
     <template v-slot:footer>
       <el-button @click="cancelDelete">取消</el-button>
-      <el-button type="danger" @click="deleteUser(userIdToDelete)"> 确定 </el-button>
+      <el-button type="danger" @click="deleteUser(userIdToDelete)">
+        确定
+      </el-button>
     </template>
   </el-dialog>
   <el-card style="margin-top: 20px">
@@ -90,14 +92,14 @@
         class="demo-ruleForm"
         :size="formSize"
       >
-        <el-form-item label="用户ID"
-          ><el-input v-model="dialogForm.userId"
+        <el-form-item label="用户ID" prop="userId"
+          ><el-input v-model="dialogForm.userId" type="number"
         /></el-form-item>
         <el-form-item label="用户名"
           ><el-input v-model="dialogForm.userName"
         /></el-form-item>
-        <el-form-item label="年龄"
-          ><el-input v-model="dialogForm.age"
+        <el-form-item label="年龄" prop="age"
+          ><el-input v-model="dialogForm.age" type="number"
         /></el-form-item>
         <el-form-item label="性别"
           ><el-input v-model="dialogForm.gender"
@@ -147,10 +149,6 @@ export default {
           label: '年龄'
         },
         {
-          value: 'gender',
-          label: '性别'
-        },
-        {
           value: 'regst_time',
           label: '注册时间范围（格式：2000-01-01, 2010-01-01）'
         }
@@ -182,6 +180,17 @@ export default {
         userName: '',
         age: '',
         gender: ''
+      },
+      rules: {
+        userId: [{ required: true, message: '请输入ID', trigger: 'blur' }],
+        age: [
+          {
+            min: 0,
+            max: 100,
+            message: '年龄必须在0到100之间',
+            trigger: 'change'
+          }
+        ]
       }
     }
   },

@@ -31,7 +31,7 @@
       <el-table-column prop="isbn" label="ISBN" width="150" />
       <el-table-column prop="avg_rating" label="均分" width="75" />
       <el-table-column prop="rating_num" label="评分人数" width="100" />
-      <el-table-column label="封面"  width="120">
+      <el-table-column label="封面" width="120">
         <template #default="{ row }">
           <img :src="row.imageUrl" alt="照片" height="100" />
         </template>
@@ -64,7 +64,9 @@
     <span>确定要删除该书籍吗？</span>
     <template v-slot:footer>
       <el-button @click="cancelDelete">取消</el-button>
-      <el-button type="danger" @click="deleteUser(userIdToDelete)"> 确定 </el-button>
+      <el-button type="danger" @click="deleteUser(userIdToDelete)">
+        确定
+      </el-button>
     </template>
   </el-dialog>
   <el-card style="margin-top: 20px">
@@ -85,10 +87,10 @@
         class="demo-ruleForm"
         :size="formSize"
       >
-        <el-form-item label="书籍ID"
-          ><el-input v-model="dialogForm.bookId"
+        <el-form-item label="书籍ID" prop="bookId"
+          ><el-input v-model="dialogForm.bookId" type="number"
         /></el-form-item>
-        <el-form-item label="标题"
+        <el-form-item label="标题" prop="title"
           ><el-input v-model="dialogForm.title"
         /></el-form-item>
         <el-form-item label="作者"
@@ -100,7 +102,7 @@
         <el-form-item label="isbn13"
           ><el-input v-model="dialogForm.isbn13"
         /></el-form-item>
-        <el-form-item label="出版年份"
+        <el-form-item label="出版年份" prop="pub_year"
           ><el-input v-model="dialogForm.pub_year"
         /></el-form-item>
         <el-form-item label="语言"
@@ -129,6 +131,19 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      rules: {
+        bookId: [
+          { required: true, message: '请输入ID', trigger: 'blur' }
+        ],
+        title: [{ required: true, message: '请输入标题', trigger: 'change' }],
+        pub_year: [
+          {
+            pattern: /^(19|20)\d{2}$/, // 正则表达式匹配合法的年份，以19或20开头的4位数字
+            message: '请输入1900年以后的年份',
+            trigger: 'change'
+          }
+        ]
+      },
       showDeleteDialog: false,
       showConfirmDialog: false, // 确认框的可见性状态
       userIdToDelete: null, // 要删除的用户ID
