@@ -60,54 +60,43 @@
   <el-dialog v-model="dialogVisible" title="添加用户" width="50%">
     <span>请写入新数据</span>
     <div>
-      <el-select
-        v-model="value2.value"
-        class="m-2"
-        placeholder="Select"
-        span="1"
+      <el-form
+        label-position="top"
+        ref="ruleFormRef"
+        :model="dialogForm"
+        :rules="rules"
+        class="demo-ruleForm"
+        :size="formSize"
       >
-        <el-option
-          v-for="item in options2"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        />
-      </el-select>
-    </div>
-    <div>
-      <el-col :span="15">
-        <el-input clearable v-model="dialogForm.query"></el-input>
-      </el-col>
+        <el-form-item label="用户ID"
+          ><el-input v-model="dialogForm.userId"
+        /></el-form-item>
+        <el-form-item label="用户名"
+          ><el-input v-model="dialogForm.userName"
+        /></el-form-item>
+        <el-form-item label="年龄"
+          ><el-input v-model="dialogForm.age"
+        /></el-form-item>
+        <el-form-item label="性别"
+          ><el-input v-model="dialogForm.gender"
+        /></el-form-item>
+      </el-form>
     </div>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="closeDialog">Cancel</el-button>
-        <el-button type="primary" @click="closeDialog">Confirm</el-button>
+        <el-button type="primary" @click="addUser">Confirm</el-button>
       </span>
-    </template>
-  </el-dialog>
-  <!-- 删除确认框 -->
-  <el-dialog
-    title="确认删除"
-    v-model:visible="showConfirmDialog"
-    width="30%"
-    @close="handleConfirmDialogClose"
-  >
-    <span>确定要删除该用户吗？</span>
-    <template v-slot:footer>
-      <el-button @click="handleConfirmDialogClose">取消</el-button>
-      <el-button type="primary" @click="confirmDeleteUser">确认</el-button>
     </template>
   </el-dialog>
 </template>
 
 <script setup>
 import { View, Delete, Plus, Search } from '@element-plus/icons-vue'
+import axios from 'axios'
 </script>
 
 <script>
-import axios from 'axios'
-
 export default {
   data() {
     return {
@@ -119,9 +108,6 @@ export default {
         query: '',
         pagenum: 1,
         pagesize: 2
-      },
-      dialogForm: {
-        query: ''
       },
       dialogVisible: false,
       options: [
@@ -166,7 +152,13 @@ export default {
       ],
       tableData: [], // 用户信息表格数据
       detailData: [], // 详细信息表格数据
-      rateData: [] // 评分记录表格数据
+      rateData: [], // 评分记录表格数据
+      dialogForm: {
+        userId: '',
+        userName: '',
+        age: '',
+        gender: ''
+      }
     }
   },
   methods: {
@@ -258,6 +250,34 @@ export default {
           const data = response.data
           console.log(data)
           alert('删除成功')
+        })
+        .catch((error) => {
+          console.error('请求错误:', error)
+        })
+    },
+    addUser() {
+      const requestData = {
+        user_id: this.dialogForm.userId,
+        age: parseInt(this.dialogForm.age),
+        user_name: this.dialogForm.userName,
+        regst_time: new Date().toISOString().split('T')[0],
+        gender: this.dialogForm.gender
+      }
+      axios
+        .post('/api/usermanage/add_user', requestData, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          const data = response.data
+          if (data.code === 0) {
+            alert('添加成功')
+            this.search()
+            this.closeDialog()
+          } else {
+            alert(data.message)
+          }
         })
         .catch((error) => {
           console.error('请求错误:', error)
