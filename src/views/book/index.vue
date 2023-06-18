@@ -48,12 +48,25 @@
             type="danger"
             :icon="Delete"
             circle
-            @click="deleteUser(scope.row.book_id)"
+            @click="confirmDelete(scope.row.book_id)"
           />
         </template>
       </el-table-column>
     </el-table>
   </el-card>
+  <el-dialog
+    title="确认删除书籍"
+    :model-value="showDeleteDialog"
+    @update:model-value="showDeleteDialog = $event"
+    :close-on-click-modal="false"
+    :show-close="false"
+  >
+    <span>确定要删除该书籍吗？</span>
+    <template v-slot:footer>
+      <el-button @click="cancelDelete">取消</el-button>
+      <el-button type="danger" @click="deleteUser(userIdToDelete)"> 确定 </el-button>
+    </template>
+  </el-dialog>
   <el-card style="margin-top: 20px">
     <h4>Tag记录</h4>
     <el-divider />
@@ -116,6 +129,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      showDeleteDialog: false,
       showConfirmDialog: false, // 确认框的可见性状态
       userIdToDelete: null, // 要删除的用户ID
       value: { value: '' },
@@ -164,6 +178,13 @@ export default {
     }
   },
   methods: {
+    confirmDelete(userId) {
+      this.showDeleteDialog = true // 打开弹窗
+      this.userIdToDelete = userId // 保存要删除的用户ID
+    },
+    cancelDelete() {
+      this.showDeleteDialog = false // 关闭弹窗
+    },
     search() {
       let apiUrl = ''
       let requestData = {}

@@ -41,12 +41,25 @@
             type="danger"
             :icon="Delete"
             circle
-            @click="deleteUser(scope.row.user_id)"
+            @click="confirmDelete(scope.row.user_id)"
           />
         </template>
       </el-table-column>
     </el-table>
   </el-card>
+  <el-dialog
+    title="确认删除用户"
+    :model-value="showDeleteDialog"
+    @update:model-value="showDeleteDialog = $event"
+    :close-on-click-modal="false"
+    :show-close="false"
+  >
+    <span>确定要删除该用户吗？</span>
+    <template v-slot:footer>
+      <el-button @click="cancelDelete">取消</el-button>
+      <el-button type="danger" @click="deleteUser(userIdToDelete)"> 确定 </el-button>
+    </template>
+  </el-dialog>
   <el-card style="margin-top: 20px">
     <h4>评分记录</h4>
     <el-divider />
@@ -109,6 +122,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      showDeleteDialog: false,
       showConfirmDialog: false, // 确认框的可见性状态
       userIdToDelete: null, // 要删除的用户ID
       value: { value: '' },
@@ -172,6 +186,13 @@ export default {
     }
   },
   methods: {
+    confirmDelete(userId) {
+      this.showDeleteDialog = true // 打开弹窗
+      this.userIdToDelete = userId // 保存要删除的用户ID
+    },
+    cancelDelete() {
+      this.showDeleteDialog = false // 关闭弹窗
+    },
     search() {
       let apiUrl = ''
       let requestData = {}
@@ -253,7 +274,7 @@ export default {
           console.error('请求错误:', error)
         })
 
-        axios
+      axios
         .post('/api/usermanage/user_toread_book', requestData)
         .then((response) => {
           const data = response.data
@@ -270,19 +291,19 @@ export default {
         })
     },
     deleteUser(userId) {
-      this.userIdToDelete = userId // 保存要删除的用户ID
-      this.showConfirmDialog = true // 打开确认框
       axios
         .post('/api/usermanage/delete_user', { user_id: userId })
         .then((response) => {
           const data = response.data
           console.log(data)
           alert('删除成功')
+          this.showDeleteDialog = false // 关闭弹窗
         })
         .catch((error) => {
           console.error('请求错误:', error)
         })
     },
+
     addUser() {
       const requestData = {
         user_id: this.dialogForm.userId,
