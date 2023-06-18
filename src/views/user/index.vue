@@ -29,7 +29,7 @@
       <el-table-column prop="age" label="年龄" width="150" />
       <el-table-column prop="gender" label="性别" width="150" />
       <el-table-column prop="regst_time" label="创建时间" width="150" />
-      <el-table-column label="操作" width="200">
+      <el-table-column fixed="right" label="操作" width="200">
         <template #default="scope">
           <el-button
             type="primary"
@@ -57,8 +57,17 @@
       <el-table-column prop="rating" label="打分" width="150" />
     </el-table>
   </el-card>
+  <el-card style="margin-top: 20px">
+    <h4>阅读书单</h4>
+    <el-divider />
+    <el-table :data="readData" stripe style="width: 100%">
+      <el-table-column prop="book_id" label="书籍ID" width="150" />
+      <el-table-column prop="title" label="书籍标题" width="150" />
+      <el-table-column prop="authors" label="作者" width="150" />
+      <el-table-column prop="isbn" label="ISBN" width="150" />
+    </el-table>
+  </el-card>
   <el-dialog v-model="dialogVisible" title="添加用户" width="50%">
-    <span>请写入新数据</span>
     <div>
       <el-form
         label-position="top"
@@ -153,6 +162,7 @@ export default {
       tableData: [], // 用户信息表格数据
       detailData: [], // 详细信息表格数据
       rateData: [], // 评分记录表格数据
+      readData: [],
       dialogForm: {
         userId: '',
         userName: '',
@@ -198,7 +208,8 @@ export default {
           user_regist_time2: endTime.trim()
         }
       }
-
+      this.rateData = []
+      this.readData = []
       axios
         .post(apiUrl, requestData)
         .then((response) => {
@@ -233,7 +244,24 @@ export default {
           if (data.code === 0) {
             this.rateData = Object.values(data.result)
           } else {
-            alert(data.message)
+            alert('该用户没有评价记录')
+            this.rateData = []
+            console.error('请求失败:', data.message)
+          }
+        })
+        .catch((error) => {
+          console.error('请求错误:', error)
+        })
+
+        axios
+        .post('/api/usermanage/user_toread_book', requestData)
+        .then((response) => {
+          const data = response.data
+          if (data.code === 0) {
+            this.readData = Object.values(data.result)
+          } else {
+            alert('该用户没有阅读书单记录')
+            this.readData = []
             console.error('请求失败:', data.message)
           }
         })

@@ -36,7 +36,7 @@
           <img :src="row.imageUrl" alt="照片" height="100" />
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="200">
+      <el-table-column fixed="right" label="操作" width="200">
         <template #default="scope">
           <el-button
             type="primary"
@@ -62,8 +62,7 @@
       <el-table-column prop="count" label="标记次数" width="150" />
     </el-table>
   </el-card>
-  <el-dialog v-model="dialogVisible" title="添加用户" width="50%">
-    <span>请写入新数据</span>
+  <el-dialog v-model="dialogVisible" title="添加书籍" width="50%">
     <div>
       <el-form
         label-position="top"
