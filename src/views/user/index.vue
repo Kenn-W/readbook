@@ -67,7 +67,7 @@
     <el-divider />
     <el-table :data="rateData" stripe style="width: 100%">
       <el-table-column prop="book_id" label="书籍ID" width="150" />
-      <el-table-column prop="title" label="书籍标题" width="150" />
+      <el-table-column prop="title" label="书籍标题" width="300" />
       <el-table-column prop="isbn" label="ISBN" width="150" />
       <el-table-column prop="rating" label="打分" width="150" />
     </el-table>
@@ -77,7 +77,7 @@
     <el-divider />
     <el-table :data="readData" stripe style="width: 100%">
       <el-table-column prop="book_id" label="书籍ID" width="150" />
-      <el-table-column prop="title" label="书籍标题" width="150" />
+      <el-table-column prop="title" label="书籍标题" width="300" />
       <el-table-column prop="authors" label="作者" width="150" />
       <el-table-column prop="isbn" label="ISBN" width="150" />
     </el-table>

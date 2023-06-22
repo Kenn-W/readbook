@@ -277,6 +277,7 @@ export default {
             this.rateData = Object.values(data.result)
           } else {
             alert('本书没有tag记录')
+            this.rateData = []
             // console.error('请求失败:', data.message)
           }
         })
