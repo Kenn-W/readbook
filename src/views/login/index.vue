@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form ref="formRef" :model="form" class="login-form" :rules="rules">
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">宿舍分配系统</h3>
       </div>
       <el-form-item prop="username">
         <el-icon :size="20" class="svg-container">
@@ -58,7 +58,7 @@ export default {
           // 处理登录成功的响应
           if (response.data.code === 200) {
             alert('登陆成功')
-            router.replace('/home')
+            router.replace('/information')
             console.log(response.data)
           } else {
             alert('登陆失败')
@@ -93,7 +93,7 @@ $cursor: #fff;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: $bg;
+  background-image: url("@//assets/images/bg.jpg");
   overflow: hidden;
 
   .login-form {
