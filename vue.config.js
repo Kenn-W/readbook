@@ -21,17 +21,17 @@ module.exports = {
     )
   },
   devServer: {
-    https: false,
-    hot: true,
-    proxy: {
-      '/': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    }
+    // https: false,
+    // hot: true,
+    // proxy: {
+    //   '/': {
+    //     target: 'http://localhost:8080',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // }
   },
   css: {
     loaderOptions: {

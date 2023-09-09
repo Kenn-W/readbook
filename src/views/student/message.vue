@@ -143,7 +143,7 @@
       </div>
     </div>
     <!--详细信息对话框-->
-    <el-dialog v-model:visible="detailVisible" width="40%">
+    <el-dialog v-model="detailVisible" width="40%">
       <div :model="detailInfo" class="dialog-title">
         {{ detailInfo.name }} {{ detailInfo.id }}
       </div>

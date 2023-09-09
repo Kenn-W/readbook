@@ -421,6 +421,7 @@
 </template>
 
 <script>
+// import { Message } from 'element-ui'
 export default {
   name: 'TeamlLobby',
   data() {
@@ -470,16 +471,10 @@ export default {
       this.detailVisible = true
     },
     invite() {
-      this.$message({
-        message: '邀请成功',
-        type: 'success'
-      })
+      // Message.success('邀请成功')
     },
     join() {
-      this.$message({
-        message: '申请成功',
-        type: 'success'
-      })
+      // Message.success('申请成功')
     }
   }
 }

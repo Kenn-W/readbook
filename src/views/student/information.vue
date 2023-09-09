@@ -14,8 +14,13 @@
         <div class="transverse">
           <div class="info-title">
             <div style="padding-top: 5px; float: left">基本信息</div>
-            <el-button type="success" size="small" style="margin-right: 20px; float: right; margin-top: 10px"
-              @click="showPersonalInfo">编辑</el-button>
+            <el-button
+              type="success"
+              size="small"
+              style="margin-right: 20px; float: right; margin-top: 10px"
+              @click="showPersonalInfo"
+              >编辑</el-button
+            >
           </div>
           <div class="info-block">
             <div class="block-left">
@@ -49,8 +54,13 @@
         <div class="transverse">
           <div class="info-title">
             <div style="padding-top: 5px; float: left">问卷信息</div>
-            <el-button type="success" size="small" style="margin-right: 20px; float: right; margin-top: 10px"
-              @click="showQuestionnaireEdit">编辑</el-button>
+            <el-button
+              type="success"
+              size="small"
+              style="margin-right: 20px; float: right; margin-top: 10px"
+              @click="showQuestionnaireEdit"
+              >编辑</el-button
+            >
           </div>
           <div class="info-block">
             <div class="block-left">
@@ -72,8 +82,13 @@
               <br />
               <div>{{ questionnaireInfo.hobby }}</div>
               <br />
-              <el-button type="primary" size="small" style="margin-right: 20px; float: right; margin-top: 35px"
-                @click="showQuestionnaireInfo">更多</el-button>
+              <el-button
+                type="primary"
+                size="small"
+                style="margin-right: 20px; float: right; margin-top: 35px"
+                @click="showQuestionnaireInfo"
+                >更多</el-button
+              >
             </div>
             <div style="clear: both"></div>
           </div>
@@ -81,13 +96,29 @@
         <div class="transverse">
           <div class="info-title">
             <div style="padding-top: 5px; float: left">个人Tag</div>
-            <el-button type="success" size="small" style="margin-right: 20px; float: right; margin-top: 10px"
-              @click="addNewTag">新增&nbsp;+</el-button>
-            <el-button type="danger" size="small" style="margin-right: 20px; float: right; margin-top: 10px"
-              @click="deleteTagShow">删除&nbsp;-</el-button>
+            <el-button
+              type="success"
+              size="small"
+              style="margin-right: 20px; float: right; margin-top: 10px"
+              @click="addNewTag"
+              >新增&nbsp;+</el-button
+            >
+            <el-button
+              type="danger"
+              size="small"
+              style="margin-right: 20px; float: right; margin-top: 10px"
+              @click="deleteTagShow"
+              >删除&nbsp;-</el-button
+            >
           </div>
           <div class="info-block" style="padding-left: 20px !important">
-            <el-tag size="medium" type="success" v-for="item in tagList" :key="item">{{ item }}</el-tag>
+            <el-tag
+              size="medium"
+              type="success"
+              v-for="item in tagList"
+              :key="item"
+              >{{ item }}</el-tag
+            >
           </div>
         </div>
       </div>
@@ -95,10 +126,20 @@
         <div class="transverse" v-if="groupState">
           <div class="info-title">
             <div style="padding-top: 5px; float: left">组队信息</div>
-            <el-button type="success" size="small" style="margin-right: 10px; float: right; margin-top: 10px"
-              @click="teamTagShow">Tag编辑</el-button>
-            <el-button type="danger" size="small" style="margin-right: 10px; float: right; margin-top: 10px"
-              @click="leaveGroup">退出小组</el-button>
+            <el-button
+              type="success"
+              size="small"
+              style="margin-right: 10px; float: right; margin-top: 10px"
+              @click="teamTagShow"
+              >Tag编辑</el-button
+            >
+            <el-button
+              type="danger"
+              size="small"
+              style="margin-right: 10px; float: right; margin-top: 10px"
+              @click="leaveGroup"
+              >退出小组</el-button
+            >
           </div>
           <div class="info-block">
             <div class="block-left" style="height: 160px !important">
@@ -123,7 +164,13 @@
             </div>
             <div style="clear: both"></div>
             <div class="foot-tag">
-              <el-tag size="medium" type="success" v-for="item in teamTagList" :key="item">{{ item }}</el-tag>
+              <el-tag
+                size="medium"
+                type="success"
+                v-for="item in teamTagList"
+                :key="item"
+                >{{ item }}</el-tag
+              >
             </div>
           </div>
         </div>
@@ -134,8 +181,13 @@
     </div>
     <div style="clear: both"></div>
     <!--个人信息对话框-->
-    <el-dialog v-model:visible="personInfoIsShow" width="40%" title="个人信息编辑" :close-on-click-modal="false"
-      :show-close="false">
+    <el-dialog
+      v-model="personInfoIsShow"
+      width="40%"
+      title="个人信息编辑"
+      :close-on-click-modal="false"
+      :show-close="false"
+    >
       <el-form :model="personInfoList" label-width="100px">
         <el-form-item label="姓名：" :rules="[{ required: true }]">
           <el-input v-model="personInfoList.name"></el-input>
@@ -156,12 +208,14 @@
       </el-form>
       <div class="dialog-footer">
         <el-button size="small" @click="cancelPersonalInfo">取 消</el-button>
-        <el-button type="primary" size="small" @click="determinePersonalInfo">确 定</el-button>
+        <el-button type="primary" size="small" @click="determinePersonalInfo"
+          >确 定</el-button
+        >
       </div>
     </el-dialog>
 
     <!--问卷详细信息对话框-->
-    <el-dialog v-model:visible="questionnaireInfoVisible" title="问卷信息" width="40%">
+    <el-dialog v-model="questionnaireInfoVisible" title="问卷信息" width="40%">
       <el-descriptions column="1" :model="questionnaireInfo">
         <el-descriptions-item label="睡觉时间">{{
           questionnaireInfo.sleepTime
@@ -185,23 +239,34 @@
     </el-dialog>
 
     <!--问卷信息编辑对话框-->
-    <el-dialog v-model:visible="questionnaireEditVisible" width="40%" title="个人信息编辑" :close-on-click-modal="false"
-      :show-close="false">
+    <el-dialog
+      v-model="questionnaireEditVisible"
+      width="40%"
+      title="个人信息编辑"
+      :close-on-click-modal="false"
+      :show-close="false"
+    >
       <el-form :model="questionnaireInfo" label-width="100px">
         <el-form-item label="睡觉时间：" :rules="[{ required: true }]">
-          <el-time-select v-model="questionnaireInfo.sleepTime" :picker-options="{
-            start: '20:00',
-            step: '00:30',
-            end: '24:00'
-          }">
+          <el-time-select
+            v-model="questionnaireInfo.sleepTime"
+            :picker-options="{
+              start: '20:00',
+              step: '00:30',
+              end: '24:00'
+            }"
+          >
           </el-time-select>
         </el-form-item>
         <el-form-item label="起床时间：" :rules="[{ required: true }]">
-          <el-time-select v-model="questionnaireInfo.getupTime" :picker-options="{
-            start: '4:00',
-            step: '00:30',
-            end: '14:00'
-          }">
+          <el-time-select
+            v-model="questionnaireInfo.getupTime"
+            :picker-options="{
+              start: '4:00',
+              step: '00:30',
+              end: '14:00'
+            }"
+          >
           </el-time-select>
         </el-form-item>
         <el-form-item label="爱好：" :rules="[{ required: true }]">
@@ -218,57 +283,103 @@
         </el-form-item>
       </el-form>
       <div class="dialog-footer">
-        <el-button size="small" @click="cancelQuestionnaireEdit">取 消</el-button>
-        <el-button type="primary" size="small" @click="determineQuestionnaireEdit">确 定</el-button>
+        <el-button size="small" @click="cancelQuestionnaireEdit"
+          >取 消</el-button
+        >
+        <el-button
+          type="primary"
+          size="small"
+          @click="determineQuestionnaireEdit"
+          >确 定</el-button
+        >
       </div>
     </el-dialog>
 
     <!--新增tag对话框-->
-    <el-dialog v-model:visible="addTagVisible" width="20%" title="请输入新增Tag" :close-on-click-modal="false"
-      :show-close="false">
+    <el-dialog
+      v-model="addTagVisible"
+      width="20%"
+      title="请输入新增Tag"
+      :close-on-click-modal="false"
+      :show-close="false"
+    >
       <el-input v-model="newTag" maxlength="3" show-word-limit></el-input>
       <div class="dialog-footer">
         <el-button size="small" @click="cancelAddNewTag">取 消</el-button>
-        <el-button type="primary" size="small" @click="determineAddNewTag">确 定</el-button>
+        <el-button type="primary" size="small" @click="determineAddNewTag"
+          >确 定</el-button
+        >
       </div>
     </el-dialog>
 
     <!--删除tag对话框-->
-    <el-dialog v-model:visible="deleteTagVisible" width="20%" title="请选择要删除的Tag" :close-on-click-modal="false"
-      :show-close="false">
+    <el-dialog
+      v-model="deleteTagVisible"
+      width="20%"
+      title="请选择要删除的Tag"
+      :close-on-click-modal="false"
+      :show-close="false"
+    >
       <el-select v-model="deleteTag" placeholder="请选择">
-        <el-option v-for="item in tagList" :key="item" :label="item" :value="item">
+        <el-option
+          v-for="item in tagList"
+          :key="item"
+          :label="item"
+          :value="item"
+        >
         </el-option>
       </el-select>
       <div class="dialog-footer">
         <el-button size="small" @click="cancelDeleteTag">取 消</el-button>
-        <el-button type="primary" size="small" @click="determineDeleteTag">确 定</el-button>
+        <el-button type="primary" size="small" @click="determineDeleteTag"
+          >确 定</el-button
+        >
       </div>
     </el-dialog>
 
     <!--组队信息tag-->
-    <el-dialog v-model:visible="teamTagVisible" width="40%" title="组队Tag编辑" :close-on-click-modal="false"
-      :show-close="false">
+    <el-dialog
+      v-model="teamTagVisible"
+      width="40%"
+      title="组队Tag编辑"
+      :close-on-click-modal="false"
+      :show-close="false"
+    >
       <el-form :model="teamTagList" label-width="100px">
         <el-form-item label="Tag1：">
-          <el-input v-model="teamTagList.tag1" maxlength="5" show-word-limit></el-input>
+          <el-input
+            v-model="teamTagList.tag1"
+            maxlength="5"
+            show-word-limit
+          ></el-input>
         </el-form-item>
         <el-form-item label="Tag2：">
-          <el-input v-model="teamTagList.tag2" maxlength="5" show-word-limit></el-input>
+          <el-input
+            v-model="teamTagList.tag2"
+            maxlength="5"
+            show-word-limit
+          ></el-input>
         </el-form-item>
         <el-form-item label="Tag3：">
-          <el-input v-model="teamTagList.tag3" maxlength="5" show-word-limit></el-input>
+          <el-input
+            v-model="teamTagList.tag3"
+            maxlength="5"
+            show-word-limit
+          ></el-input>
         </el-form-item>
       </el-form>
       <div class="dialog-footer">
         <el-button size="small" @click="cancelTeamTag">取 消</el-button>
-        <el-button type="primary" size="small" @click="determineTeamTag">确 定</el-button>
+        <el-button type="primary" size="small" @click="determineTeamTag"
+          >确 定</el-button
+        >
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
+// import { MessageBox } from 'element-plus'
 export default {
   name: 'Information',
   data() {
@@ -440,24 +551,20 @@ export default {
     },
     // 退出小组
     leaveGroup() {
-      this.$confirm('是否要退出本小组?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
-          this.$message({
-            type: 'success',
-            message: '退出成功!'
-          })
-          this.groupState = false
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消'
-          })
-        })
+      if (window.confirm('是否要退出本小组?')) {
+        window.alert('退出成功')
+        // this.$message({
+        //   type: 'success',
+        //   message: '退出成功!'
+        // })
+        this.groupState = false
+      } else {
+        window.alert('已取消')
+        // this.$message({
+        //   type: 'info',
+        //   message: '已取消'
+        // })
+      }
     }
   }
 }
